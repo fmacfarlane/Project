@@ -2,9 +2,8 @@ require(DESeq2)
 require(RCurl)
 require(biomaRt)
 
-#remoteFile <- getURL(paste0("http://ts-ug-dev.lifesci.dundee.ac.uk/usr/local/share/BS32010-data/expression/data/RNAseqCounts.txt"))
 
-geneCounts<-read.delim("/homes/fmacfarlane/bioinformatics/RNAseqCounts.txt",head=T,sep="\t",skip=1)
+geneCounts<-read.delim("/homes/fmacfarlane/Project/RNAseqCounts.txt",head=T,sep="\t",skip=1)
 
 nonZeroCounts<-geneCounts[rowSums(geneCounts[,6:28])>0,6:28]
 
@@ -14,7 +13,7 @@ dds <- DESeqDataSetFromMatrix(as.matrix(nonZeroCounts),
                               as.data.frame(treatments),
                               design=~treatments)
 
-dds$treatments <- relevel(dds$treatments,"L" )
+dds$treatments <- relevel(dds$treatments, "X" )
 
 dds <- DESeq(dds)
 

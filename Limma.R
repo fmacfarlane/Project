@@ -1,14 +1,4 @@
-# Example of MicroArray Analysis taken from 
-# adapted from
-#		analysing-microarray-data-in-bioconductor
-# on
-#		http://bioinformatics.knowledgeblog.org
-#
-# download the BioC installation routines
-#source("http://bioconductor.org/biocLite.R")
-#biocLite()
-#biocLite("GEOquery")
-#biocLite("hgu133plus2.db")
+#Limma script for project
 library(ggplot2)
 library(reshape2)
 library(GEOquery)
@@ -51,21 +41,13 @@ library(limma)
 
 .getData <- function()
 {
-	baseDir <- "/homes/fmacfarlane/bioinformatics/"
-#	if(!file.exists(paste0(baseDir,"ROS")))
-	{
-	#	getGEOSuppFiles("ROS",baseDir=baseDir)
-	}
+	baseDir <- "/homes/fmacfarlane/Project/"
 	workingDir=paste0(baseDir)
-#	if(!exists(workingDir))
-	{
- #	dir.create(workingDir)
-	}
-#	untar(paste0(baseDir,"GSE20986/GSE20986_RAW.tar"), exdir=workingDir,
-			 #	tar="tar")
-	filenames <- c("ROS1+_10.CEL", "ROS1-_9.CEL", "ROS2+_12.CEL", "ROS2-_11.CEL", "ROS3+_14.CEL", "ROS3-_13.CEL", "ROS4+_16.CEL", "ROS4-_15.CEL")
-	samplenames <- c("ROS1+_10", "ROS1-_9", "ROS2+_12", "ROS2-_11", "ROS3+_14", "ROS3-_13", "ROS4+_16", "ROS4-_15")
-	targets <- c("plus", "minus", "plus", "minus", "plus", "minus", "plus", "minus")
+
+
+	filenames <- c("ROS1-_9.CEL", "ROS1+_10.CEL", "ROS2-_11.CEL", "ROS2+_12.CEL", "ROS3-_13.CEL", "ROS3+_14.CEL", "ROS4-_15.CEL", "ROS4+_16.CEL")
+	samplenames <- c("ROS1-_9", "ROS1+_10", "ROS2-_11", "ROS2+_12", "ROS3-_13", "ROS3+_14", "ROS4-_15", "ROS4+_16")
+	targets <- c("minus", "plus", "minus", "plus", "minus", "plus", "minus", "plus")
 
 	phenodata<-as.data.frame(cbind(filenames,samplenames,targets))
 	write.table(phenodata,paste(workingDir,"phenodata.txt",sep="/")
@@ -104,18 +86,17 @@ library(limma)
 	# Create an image of GSM24662.CEL:
 	image(celRAWqc, which=1, add.legend=TRUE)
 
-	# Create an image of GSM524665.CEL
-	# There is a spatial artifact present
+
 	image(celRAWqc, which=4, add.legend=TRUE)
 
 	# affyPLM also provides more informative boxplots
 	# RLE (Relative Log Expression) plots should have
-	# values close to zero. GSM524665.CEL is an outlier
+
 	RLE(celRAWqc, main="RLE")
 
 	# We can also use NUSE (Normalised Unscaled Standard Errors).
 	# The median standard error should be 1 for most genes.
-	# GSM524665.CEL appears to be an outlier on this plot too
+	
 	NUSE(celRAWqc, main="NUSE")
 	dev.off()
 }
@@ -134,7 +115,7 @@ library(limma)
 {
 	celfiles.filtered <- nsFilter(celRMA, 
 															require.entrez=FALSE, 
-															remove.dupEntrez=FALSE)
+															remove.dupEntrez=FALSE, )
 }
 
 
@@ -144,42 +125,36 @@ library(limma)
 # check the results of this
 # convert into factors
 	samples <- as.factor(samples)
-# set up the experimental design
-
+# set up the experimental desi
 	design <- model.matrix(~0 + samples)
 	colnames(design) <- c("plus","minus")
 
 # fit the linear model to the filtered expression set
 	fit <- lmFit(exprs(eset), design)
 
-# set up a contrast matrix to compare tissues v cell line
-	contrast.matrix <- makeContrasts(plus_minus =  plus - minus,
-																 levels=design)
-
-# check the contrast matrix
-	contrast.matrix
 
 # Now the contrast matrix is combined with the per-probeset linear model fit.
-	plus_fits <- contrasts.fit(fit, contrast.matrix)
-	plus_ebFit <- eBayes(plus_fits)
-# return the top 10 results for any given contrast
-# coef=1 is huvec_choroid, coef=2 is huvec_retina
-	ttab <- topTable(plus_ebFit, number=10000, coef=1)
 
-	nrow(topTable(plus_ebFit, coef=1, number=10000, lfc=5))
-	nrow(topTable(plus_ebFit, coef=1, number=10000, lfc=4))
-	nrow(topTable(plus_ebFit, coef=1, number=10000, lfc=3))
-	nrow(topTable(plus_ebFit, coef=1, number=10000, lfc=2))
+	plus_ebFit <- eBayes(fit)
+  
+
+#	ttab <- topTable(plus_ebFit, number=30000, coef=1, p.value=0.05)
+
+#	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=5, p.value=0.05))
+#	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=4, p.value=0.05))
+#	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=3, p.value=0.05))
+#	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=2, p.value=0.05))
 # Get a list for probesets with a four fold change or more
-	tTable <- topTable(plus_ebFit, coef=1, number=10000, lfc=4)
+	tTable <- topTable(plus_ebFit, number=30000, p.value=0.05)
+  return(tTable)
 
 	annotation <- as.data.frame(select(chicken.db,
 																		 rownames(tTable), 
 																		 c("ENSEMBL","SYMBOL")))
 	colnames(annotation) <- c("probeId","ensemblId","geneSymbol")
-	results <- merge(annotation, tTable,by.x="probeId",by.y="row.names")
-
-	head(results)
+	#results <- merge(annotation, tTable,by.x="probeId",by.y="row.names")
+	results <- merge(annotation[1:100,], tTable,by.x="probeId",by.y="row.names")
+  head(results)
 	write.table(results, "results.txt", sep="\t", quote=FALSE)
 	return(results)
 }
@@ -188,14 +163,14 @@ if(!exists("celResults"))
 {
 	celRAW <- .getData()
 	eset<-exprs(celRAW)
-	celGCRMA <- gcrma(celRAW)
 	celRMA <- rma(celRAW)
 	.ggboxIt(.summariseIt(log2(exprs(celRAW))),"sumRAW.pdf")
 	.ggboxIt(.summariseIt(exprs(celRMA)),"sumRMA.pdf")
 	.plotDensity(log2(exprs(celRAW)),"densityRAW.pdf")
 	.plotDensity(log2(exprs(celRMA)),"densityRMA.pdf")
-	celFilt <- .doFilter(celRMA)
+  celFilt <- .doFilter(celRMA)
 	celResults <- .doDE(celFilt$eset)
 
 }
+
 
