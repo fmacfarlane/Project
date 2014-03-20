@@ -1,4 +1,23 @@
 #Limma script for project
+source("http://bioconductor.org/biocLite.R")
+biocLite()
+biocLite("GEOquery")
+biocLite("chicken.db")
+biocLite("affyPLM")
+biocLite("affy")
+biocLite("arrayQualityMetrics")
+install.packages("ggplot2")
+install.packages("reshape2")
+install.packages("GEOquery")
+install.packages("affy")
+install.packages("affyPLM")
+install.packages("arrayQualityMetrics")
+install.packages("annotate")
+install.packages("chicken.db")
+install.packages("chickenprobe")
+install.packages("genefilter")
+install.packages("limma")
+#
 library(ggplot2)
 library(reshape2)
 library(GEOquery)
@@ -41,7 +60,7 @@ library(limma)
 
 .getData <- function()
 {
-	baseDir <- "/homes/fmacfarlane/Project/"
+	baseDir <- "~/GitHub/project"
 	workingDir=paste0(baseDir)
 
 
@@ -146,7 +165,7 @@ library(limma)
 #	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=2, p.value=0.05))
 # Get a list for probesets with a four fold change or more
 	tTable <- topTable(plus_ebFit, number=30000, p.value=0.05)
-  return(tTable)
+ # return(tTable)
 
 	annotation <- as.data.frame(select(chicken.db,
 																		 rownames(tTable), 
@@ -162,12 +181,12 @@ library(limma)
 if(!exists("celResults"))
 {
 	celRAW <- .getData()
-	eset<-exprs(celRAW)
+#	eset<-exprs(celRAW)
 	celRMA <- rma(celRAW)
-	.ggboxIt(.summariseIt(log2(exprs(celRAW))),"sumRAW.pdf")
-	.ggboxIt(.summariseIt(exprs(celRMA)),"sumRMA.pdf")
-	.plotDensity(log2(exprs(celRAW)),"densityRAW.pdf")
-	.plotDensity(log2(exprs(celRMA)),"densityRMA.pdf")
+#	.ggboxIt(.summariseIt(log2(exprs(celRAW))),"sumRAW.pdf")
+#	.ggboxIt(.summariseIt(exprs(celRMA)),"sumRMA.pdf")
+#	.plotDensity(log2(exprs(celRAW)),"densityRAW.pdf")
+#	.plotDensity(log2(exprs(celRMA)),"densityRMA.pdf")
   celFilt <- .doFilter(celRMA)
 	celResults <- .doDE(celFilt$eset)
 
