@@ -1,19 +1,20 @@
 require(DESeq2)
 require(RCurl)
 require(biomaRt)
+require(stringr)
 
 
-geneCounts<-read.delim("/homes/fmacfarlane/Project/RNAseqCounts.txt",head=T,sep="\t",skip=1)
+geneCounts<-read.delim("/homes/fmacfarlane/Project/RNAseqCounts.txt",head=T,sep="\t",skip=1, row.names=1)
 
 nonZeroCounts<-geneCounts[rowSums(geneCounts[,6:28])>0,6:28]
 
-treatments <- as.factor(substr(colnames(nonZeroCounts),1,1))
+treatments <- as.factor(str_sub(colnames(nonZeroCounts),-7,-7))
 
 dds <- DESeqDataSetFromMatrix(as.matrix(nonZeroCounts),
                               as.data.frame(treatments),
                               design=~treatments)
 
-dds$treatments <- relevel(dds$treatments, "X" )
+dds$treatments <- relevel(dds$treatments, "l" )
 
 dds <- DESeq(dds)
 
