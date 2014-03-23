@@ -1,6 +1,6 @@
 #Limma script for project
-#source("http://bioconductor.org/biocLite.R")
-#biocLite()
+source("http://bioconductor.org/biocLite.R")
+biocLite()
 #biocLite("GEOquery")
 #biocLite("chicken.db")
 #biocLite("affyPLM")
@@ -14,8 +14,9 @@
 #install.packages("arrayQualityMetrics")
 #install.packages("annotate")
 #install.packages("chicken.db")
-#install.packages("chickenprobe")
+#biocLite("chickenprobe")
 #install.packages("genefilter")
+biocLite("genefilter")
 #install.packages("limma")
 #
 library(ggplot2)
@@ -27,6 +28,7 @@ library(arrayQualityMetrics)
 library(annotate)
 library(chicken.db)
 library(chickenprobe)
+library(BiocGenerics)
 library(genefilter)
 library(limma)
 
@@ -60,7 +62,7 @@ library(limma)
 
 .getData <- function()
 {
-	baseDir <- "/homes/fmacfarlane/Project/"
+	baseDir <- "~/GitHub/project"
 	workingDir=paste0(baseDir)
 
 
@@ -192,4 +194,4 @@ if(!exists("celResults"))
 
 }
 
-
+sorted <- head(celResults[order(celResults$adj.P.Val),])
