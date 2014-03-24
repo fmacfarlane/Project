@@ -148,7 +148,7 @@ library(limma)
 	samples <- as.factor(samples)
 # set up the experimental desi
 	design <- model.matrix(~0 + samples)
-	colnames(design) <- c("plus","minus")
+	colnames(design) <- c("minus","plus")
 
 # fit the linear model to the filtered expression set
 	fit <- lmFit(exprs(eset), design)
@@ -194,4 +194,4 @@ if(!exists("celResults"))
 
 }
 
-sorted <- head(celResults[order(celResults$adj.P.Val),])
+sorted <- head(celResults[order(celResults$adj.P.Val),])#find lowest adjusted p values

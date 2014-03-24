@@ -42,4 +42,4 @@ annot <- getBM(attributes=c("ensembl_gene_id","external_gene_id","affy_chicken")
 annotResults <- merge(annot,DEresults,by.x="ensembl_gene_id",by.y="row.names")
 
 DEsorted <- head(DEresults[order(DEresults$padj),],desc=TRUE)
-annotsorted <- head(annotResults[order(annotResults$padj),],desc=TRUE)
+annotsorted <- head(annotResults[order(annotResults$padj),],desc=TRUE)#sorted for lowest padj
