@@ -1,0 +1,6 @@
+/homes/fmacfarlane/Project/chick_region.fna /homes/fmacfarlane/Project/anole_region.fna
+NUCMER
+
+    [S1]     [E1]  |     [S2]     [E2]  |  [LEN 1]  [LEN 2]  |  [% IDY]  | [TAGS]
+=====================================================================================
+  235595   235822  |   253586   253818  |      228      233  |    92.31  | 23	GL343308.1

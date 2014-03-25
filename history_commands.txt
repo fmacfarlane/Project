@@ -1,0 +1,382 @@
+  615  git clone https://github.com/fmacfarlane/Project.git
+  616  cd Project
+  617  ls
+  618  git add *.CEL
+  619  git commit *.CEL -m "data files"
+  620  git add *.pdf
+  621  git commit *.pdf -m "plots"
+  622  git add *.R
+  623  git commit *.R -m "Rscripts"
+  624  git add *.txt
+  625  git commit *.txt -m "text files"
+  626  git status
+  627  git push
+  628  nano README.md
+  629  git add README.md
+  630  git commit README.md -m "Read Me"
+  631  git push
+  632  cd ..
+  633  git clone https://github.com/fmacfarlane/Assignment_3.git
+  634  cd Assignment_3/
+  635  ls
+  636  git add files
+  637  git commit files
+  638  nano README.md
+  639  git add README.md
+  640  git commit README.md -m "Read Me"
+  641  git push
+  642  cd Project
+  643  ls
+  644  R
+  645  ls
+  646  ld
+  647  ls
+  648  cd ..
+  649  ls
+  650  cd Project
+  651  ls
+  652  cd ..
+  653  ls
+  654  cd Downloads/
+  655  ls
+  656  cd ../Project
+  657  ls
+  658  mkdir Assignment_4
+  659  ls
+  660  cd Assignmet_4
+  661  cd Assignment_4 
+  662  ls
+  663  c
+  664  cd ..
+  665  cd Project
+  666  ls
+  667  git init
+  668  git status
+  669  git add *.R
+  670  git commit *.R -m "Scripts"
+  671  git add *.pdf
+  672  git commit *.pdf -m "plots"
+  673  git add *.txt
+  674  git commit *.txt
+  675  git push
+  676  cd Project
+  677  git init
+  678  git status
+  679  git add Limma.R
+  680  git commit Limma.R -m "Working limma file"
+  681  git add results.txt
+  682  git commit results.txt -m "Results from limma"
+  683  git push
+  684  git status
+  685  git add *.R
+  686  git commit *.R -m "working r scripts"
+  687  git add *.pdf
+  688  git commit *.pdf -m "pdf"
+  689  git add *.txt
+  690  git commit -m "file"
+  691  git push
+  692  ls
+  693  cd Assignment_4
+  694  cd ..
+  695  ls
+  696  cd Assignment_4
+  697  ls
+  698  mb
+  699  cd Assignment_4
+  700  mb
+  701  vi marsup_rag1.1.nexus
+  702  ls
+  703  cd Assignment_4
+  704  ls
+  705  more marsup_rag1.nexus
+  706  vi marsup_rag1.nexus 
+  707  mb
+  708  vi marsup_rag1.1.nexus 
+  709  mb
+  710  ls
+  711  git clone https://github.com/fmacfarlane/Assignment_4.git
+  712  cd Assignment_4
+  713  ls
+  714  mb
+  715  ls
+  716  mb
+  717  *.tre
+  718  more *.tre
+  719  ls
+  720  more marsup_rag1.1.nexus.run2.t
+  721  mb
+  722  cd Assignment_4
+  723  ls
+  724  mb
+  725  cd Assignment_4
+  726  mb
+  727  ==
+  728  cd Assignment_4
+  729  ls
+  730  git status
+  731  git add bayestree.txt
+  732  git commit bayestree.txt -m "bayes inferred tree"
+  733  git add *.nexus
+  734  git commit *.nexus
+  735  git add *.tre
+  736  git commit *.tre -m "tree files"
+  737  git opush
+  738  git push
+  739  ls
+  740  cd Project
+  741  git pull
+  742  git checkout *.pdf
+  743  git pull
+  744  mkdir wga_output
+  745  time blastn -query chick.fna -subject bushbaby.fna -outfmt 6 -out wga_output/blastn.tab
+  746  head wga_output/blastn.tab 
+  747  wc wga_output/blastn.tab 
+  748  time blastn -query chick.fna -subject bushbaby.fna -outfmt 6 -out wga_output/megasblast.tab
+  749  head wga_output/megasblast.tab 
+  750  wc wga_output/megasblast.tab 
+  751  time blastn -query chick.fna -subject bushbaby.fna -outfmt 6 -out wga_output/dcmegablast.tab
+  752  time mummer -mum -b -c chick.fna bushbaby.fna > wga_output/mummer.mums
+  753  head wga_output/mummer.mums 
+  754  wc wga_output/mummer.mums 
+  755  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums 
+  756  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick.fna bushbaby.fna 
+  757  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  758  show-aligns wga_output/nucmer.delta "chromosome:Galgal4:23:5014083:5024789:-1" "scaffold:OtoGar3:GL873703.1:162070:176481:1" > wga_output//nucmer.aligns
+  759  show-aligns wga_output/nucmer.delta "chromosome:Galgal4:23:5014083:5024789:-1" "scaffold:OtoGar3:GL873703.1:162070:176481:1" > wga_output/nucmer.aligns
+  760  act
+  761  Mauve
+  762  mauve
+  763  wget http://gel.ahabs.wisc.edu/mauve/
+  764  Mauve
+  765  ls
+  766  more index.html
+  767  Mauve
+  768  mauve
+  769  cd ..
+  770  tar -zxvf Downloads/mauve_linux_2.3.1.tar.gz 
+  771  Mauve
+  772  cd Downloads
+  773  Mauve
+  774  ls
+  775  cd ..
+  776  ls
+  777  cd mauve_2.3.1/
+  778  ls
+  779  Mauve
+  780  mauve
+  781  cd Mauve
+  782  nano Mauve
+  783  install Mauve
+  784  install Mauve Downloads
+  785  ls
+  786  Mauve
+  787  cd
+  788  ls
+  789  cd Downloads
+  790  ls
+  791  cd
+  792  nucmer
+  793  ls
+  794  cd Project
+  795  ls
+  796  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick.fna bushbaby.fna 
+  797  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  798  show-aligns wga_output/nucmer.delta > wga_output/nucmer.aligns
+  799  show-aligns wga_output/nucmer.delta  "chick" "bushbaby" > wga_output/nucmer.aligns
+  800  show-aligns wga_output/nucmer.delta  "Galgal4:23:5014083:5024789:-1" "OtoGar3:GL873703.1:162070:176481:1" > wga_output/nucmer.aligns
+  801  cd Project
+  802  ls
+  803  git init
+  804  git status
+  805  git add *.fna
+  806  git commit "fasta file"
+  807  git status
+  808  git add *.mfa
+  809  git commit
+  810  git add *.png
+  811  git commit "png files"
+  812  git status
+  813  git add wga_output
+  814  git commit "output files"
+  815  git push
+  816  git status
+  817  cd
+  818  gunzip Downloads/Gallus_gallus.Galgal4.75.dna.chromosome.23.fa.gz 
+  819  ls
+  820  cd Downloads
+  821  ls
+  822  gunzip Otolemur_garnettii.OtoGar3.75.dna.nonchromosomal.fa.gz 
+  823  cd ../Project
+  824  ls
+  825  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab
+  826  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  827  time mummer -mum -b -c chick23.fna bb_genome.fna > wga_output/mummer.mums
+  828  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums
+  829  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  830  head wga_output/blastn.tab
+  831  ls
+  832  ls wga_output/
+  833  rm wga_output/blastn.tab 
+  834  cd
+  835  git clone https://github.com/widdowquinn/Teaching.git
+  836  cd Teaching/Comparative_Genomics_and_Visualisation/Part_1
+  837  ls
+  838  cd whole_genome_alignment/
+  839  ls
+  840  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  841  mkdir wga_output
+  842  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  843  ls
+  844  head wga_output/blastn.tab
+  845  time mummer -mum -b -c chick23.fna  bb_genome.fna > wga_output/mummer.mums
+  846  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums 
+  847  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick23.fna bb_genome.fna 
+  848  shoe-cooreds -r wga_output/nucmer.delta > wag/nucmer.coords
+  849  shoe-cooreds -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  850  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  851  time blastn -query chick23.fna -subject bb_genome.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  852  cd
+  853  cd Project
+  854  ls
+  855  cd wga_output/
+  856  ls
+  857  git status
+  858  git add 8.fna
+  859  git add *.fna
+  860  cd ..
+  861  git add *.fna
+  862  git add wga_output/
+  863  git add wga_output/*.png
+  864  git init
+  865  git add wga_output/
+  866  git rm 8.fna
+  867  git status
+  868  git add wga_output/
+  869  git add wga_output/mummer.png
+  870  git checkout 8.fna
+  871  rm /homes/fmacfarlane/Project/.git/index.lock
+  872  git add wga_output/mummer.png
+  873  git commit -m "png"
+  874  git status
+  875  git add wga_output/
+  876  git push
+  877  git add --all
+  878  cd Project
+  879  git init
+  880  git status
+  881  git add *.R
+  882  git commit "treeplotter"
+  883  git commit -m "treeplotter"
+  884  git push
+  885  git add homologuesclustalalign.fna.mfa
+  886  git commit  homologuesclustalalign.fna.mfa -m "alignment"
+  887  git push
+  888  cd Project
+  889  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  890  head wga_output/blastn.tab
+  891  wc wga_output/blastn.tab
+  892  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  893  head wga_output/blastn.tab
+  894  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  895  head wga_output/blastn.tab
+  896  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  897  head wga_output/blastn.tab
+  898  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  899  head wga_output/mummer.mums
+  900  wc wga_output/mummer.mums
+  901  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums
+  902  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  903  head wga_output/blastn.tab
+  904  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  905  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums
+  906  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab
+  907  head wga_output/blastn.tab
+  908  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  909  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums
+  910  cd Project
+  911  ls
+  912  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  913  head wga_output/blastn.tab 
+  914  wc wga_output/blastn.tab 
+  915  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/megablast.tab -task megablast
+  916  head wga_output/megablast.tab 
+  917  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/megablast.tab -task megablast
+  918  head wga_output/megablast.tab 
+  919  wc wga_output/megablast.tab 
+  920  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/megablast.tab -task megablast
+  921  head wga_output/megablast.tab
+  922  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/dcmegablast.tab -task dc-megablast
+  923  head wga_output/dcmegablast.tab
+  924  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  925  head wga_output/mummer.mums
+  926  wc wga_output/mummer.mums
+  927  mummerplot --png --prefix=wga_output/mummer wga_output/mummer.mums
+  928  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick_region.fna anole_region.fna
+  929  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  930  show-aligns wga_output/nucmer.delta "23 dna:chromosome chromosome:Galgal4:23:5000683:5038189:1" "GL343308.1 dna:scaffold scaffold:AnoCar2.0:GL343308.1:1364446:1406791:1" > wga_output/nucmer.aligns
+  931  delta-filter -q -r wga_output/nucmer.delta > wga_output/nucmer.filter
+  932  mummerplot --png wga_output/nucmer.filter -R chick_region.fna -Q anole_region.fna --prefix=wga_output/nucmer
+  933  act
+  934  cd ../Downloads/
+  935  ls
+  936  gunzip ensembl.txt.gz 
+  937  gunzip ensembl(1).txt.gz 
+  938  ls
+  939  gunzip ensembl(1).txt.gz 
+  940  ls
+  941  gunzip ensembl (1).txt.gz 
+  942  gunzip ensembl(1).txt.gz 
+  943  gunzip ensembl(l).txt.gz 
+  944  ls
+  945  gunzip ensembl.txt.gz 
+  946  ls
+  947  gunzip ensembl.txt.gz 
+  948  cd
+  949  cd Project
+  950  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  951  head wga_output/mummer.mums
+  952  wc wga_output/mummer.mums
+  953  mummerplot --png -prefix=wga_output/mummer wga_output/mummer.mums
+  954  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick_region.fna anole_region.fna
+  955  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  956  show-aligns wga_output/nucmer.delta > wga_output/nucmer.aligns
+  957  show-aligns wga_output/nucmer.delta "23 dna:chromosome chromosome:Galgal4:23:4914683:5124189:1" "GL343308.1 dna:scaffold scaffold:AnoCar2.0:GL343308.1:1278446:1492791:1"  > wga_output/nucmer.aligns
+  958  delta-filter -q -r wga_output/nucmer.delta  > wga_output/nucmer.filter
+  959  mummerplot --png wga_output/nucmer.filter -R chick_region.fna -Q anole_region.fna --prefix=wga_output/nucmer
+  960  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  961  head wga_output/blastn.tab 
+  962  wc wga_output/blastn.tab 
+  963  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/megablast.tab -task megablast
+  964  head wga_output/megablast.tab 
+  965  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/dcmegablast.tab -task dc-megablast
+  966  head wga_output/dcmegablast.tab 
+  967  act
+  968  cd ../Downloads/
+  969  ls
+  970  gunzip ensembl.txt.gz 
+  971  cd ..
+  972  cd Project/
+  973  ls
+  974  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/blastn.tab -task blastn
+  975  head wga_output/blastn.tab 
+  976  time blastn -query chick_region.fna -subject anole_region.fna -outfmt 6 -out wga_output/megablast.tab -task megablast
+  977  head wga_output/megablast.tab 
+  978  act
+  979  time mummer -mum -b -c chick_region.fna anole_region.fna > wga_output/mummer.mums
+  980  head wga_output/mummer.mums
+  981  mummerplot --png -prefix=wga_output/mummer wga_output/mummer.mums
+  982  act
+  983  time nucmer --maxgap=500 --mincluster=100 --prefix=wga_output/nucmer chick_region.fna anole_region.fna
+  984  show-coords -r wga_output/nucmer.delta > wga_output/nucmer.coords
+  985  show-aligns wga_output/nucmer.delta "23 dna:chromosome chromosome:Galgal4:23:4914683:5124189:1" "GL343308.1 dna:scaffold scaffold:AnoCar2.0:GL343308.1:1278446:1492791:1"  > wga_output/nucmer.aligns
+  986  delta-filter -q -r wga_output/nucmer.delta  > wga_output/nucmer.filter
+  987  mummerplot --png wga_output/nucmer.filter -R chick_region.fna -Q anole_region.fna --prefix=wga_output/nucmer
+  988  git init
+  989  git status
+  990  git add wga_output/all
+  991  git add wga_output
+  992  git add --all
+  993  git commit -m "files"
+  994  git push
+  995  git status
+  996  history
