@@ -6,7 +6,7 @@ unset key
 set border 0
 set tics scale 0
 set xlabel "REF"
-set ylabel "scaffold:OtoGar3:GL873703.1:162070:176481:1"
+set ylabel "GL873520.1"
 set format "%.0f"
 set mouse format "%.0f"
 set mouse mouseformat "[%.0f, %.0f]"
