@@ -1,23 +1,23 @@
 #Limma script for project
+#install nd require neccessary packages
 source("http://bioconductor.org/biocLite.R")
 biocLite()
-#biocLite("GEOquery")
-#biocLite("chicken.db")
-#biocLite("affyPLM")
-#biocLite("affy")
-#biocLite("arrayQualityMetrics")
-#install.packages("ggplot2")
-#install.packages("reshape2")
-#install.packages("GEOquery")
-#install.packages("affy")
-#install.packages("affyPLM")
-#install.packages("arrayQualityMetrics")
-#install.packages("annotate")
-#install.packages("chicken.db")
-#biocLite("chickenprobe")
-#install.packages("genefilter")
+biocLite("GEOquery")
+biocLite("chicken.db")
+biocLite("affyPLM")
+biocLite("affy")
+biocLite("arrayQualityMetrics")
+install.packages("ggplot2")
+install.packages("reshape2")
+install.packages("GEOquery")
+install.packages("affy")
+install.packages("affyPLM")
+install.packages("arrayQualityMetrics")
+install.packages("annotate")
+install.packages("chicken.db")
+biocLite("chickenprobe")
 biocLite("genefilter")
-#install.packages("limma")
+install.packages("limma")
 #
 library(ggplot2)
 library(reshape2)
@@ -31,7 +31,7 @@ library(chickenprobe)
 library(BiocGenerics)
 library(genefilter)
 library(limma)
-
+#function to plot the summarised boxplots
 .ggboxIt <- function(dfin,pdfname)
 {	# draw a ggplot boxplot of data frame produced by .summarise.it()
 	gp <- ggplot(dfin, aes(x = name, ymin = lwisk, lower = lbox,
@@ -42,10 +42,9 @@ library(limma)
 	gp <- gp + labs(y = "Log2(Intensity)", x = "")
   ggsave(pdfname) 
 }
-
+#function to summarise the raw and normalised data, which can then be plotted using the ggplot function
 .summariseIt <- function(dfraw,phenoData)
-{ # create quantile data from a dataframe of depths
-  # useful for munging into ggplot, however probably a plyr function for this too
+{
 	dfin <- melt(dfraw)
 	colnames(dfin) <- c("probeId","sample","value")
 	dfin$group<-factor(dfin$sample)
@@ -59,27 +58,25 @@ library(limma)
   rownames(stats) <- NULL
  	return(stats)
 }
-
+#Input data from ROS.Cel files in Project directory
 .getData <- function()
-{
+{#set current directory as working directory
 	baseDir <- "~/GitHub/project"
 	workingDir=paste0(baseDir)
 
-
+#input filenames and samplenames
 	filenames <- c("ROS1-_9.CEL", "ROS1+_10.CEL", "ROS2-_11.CEL", "ROS2+_12.CEL", "ROS3-_13.CEL", "ROS3+_14.CEL", "ROS4-_15.CEL", "ROS4+_16.CEL")
 	samplenames <- c("ROS1-_9", "ROS1+_10", "ROS2-_11", "ROS2+_12", "ROS3-_13", "ROS3+_14", "ROS4-_15", "ROS4+_16")
-	targets <- c("minus", "plus", "minus", "plus", "minus", "plus", "minus", "plus")
-
+	#set targete to correspond to treated(plus) or untreated(minus) samples
+  targets <- c("minus", "plus", "minus", "plus", "minus", "plus", "minus", "plus")
+# combine the above filenames,samplenames and targets into a dataframe and export table as a text file
 	phenodata<-as.data.frame(cbind(filenames,samplenames,targets))
 	write.table(phenodata,paste(workingDir,"phenodata.txt",sep="/")
 							,quote=F,row.name=F)
 	celRAW <- ReadAffy(celfile.path=workingDir,compress=T,
 										 phenoData=phenodata)
-	#arrayQualityMetrics(expressionset=celRAW,
-	#										outdir=paste0(baseDir,"celRAW_AQM"),
-	#										force=T,do.logtransform=T)
 }
-
+#Function to plot the distribution of signal intensities for the raw and normalised data
 .plotDensity <- function(exps,filename)
 {
 	pdf(filename)
@@ -104,19 +101,18 @@ library(limma)
 	#affyPLM is required to interrogate celRMA
 	celRAWqc <- fitPLM(celRAW)
 
-	# Create an image of GSM24662.CEL:
+	# Create an image of the ROS data
 	image(celRAWqc, which=1, add.legend=TRUE)
 
 
 	image(celRAWqc, which=4, add.legend=TRUE)
 
 	# affyPLM also provides more informative boxplots
-	# RLE (Relative Log Expression) plots should have
+
 
 	RLE(celRAWqc, main="RLE")
 
-	# We can also use NUSE (Normalised Unscaled Standard Errors).
-	# The median standard error should be 1 for most genes.
+	# We can also use NUSE (Normalised Unscaled Standard Error)
 	
 	NUSE(celRAWqc, main="NUSE")
 	dev.off()
@@ -124,14 +120,13 @@ library(limma)
 
 .doCluster <- function(celRMA)
 {
-#Quick and dirty clustering much better use pvclust
-#Clustering like normalization is a bit of a black art
+#performs clustering on the normalised data
 	eset <- exprs(celRMA)
 	distance <- dist(t(eset),method="maximum")
 	clusters <- hclust(distance)
-	plot(clusters)
+	plot(clusters)#these are plotted as boxplots
 }
-
+#We then filter the data
 .doFilter <- function(celRMA)
 {
 	celfiles.filtered <- nsFilter(celRMA, 
@@ -143,10 +138,9 @@ library(limma)
 .doDE <- function(eset)
 {
 	samples <- eset$targets
-# check the results of this
 # convert into factors
 	samples <- as.factor(samples)
-# set up the experimental desi
+# set up the experimental design
 	design <- model.matrix(~0 + samples)
 	colnames(design) <- c("minus","plus")
 
@@ -167,8 +161,8 @@ library(limma)
 	nrow(topTable(plus_ebFit, coef=1, number=30000, lfc=2))
  #Get a list for probesets with a four fold change or more
 	tTable <- topTable(plus_ebFit, number=30000, p.value=0.05)
- # return(tTable)
-
+ # sets the p-value limit to be 0.05
+#then create table of results with relevant gene information taken from the chicken database
 	annotation <- as.data.frame(select(chicken.db,
 																		 rownames(tTable), 
 																		 c("ENSEMBL","SYMBOL")))
@@ -179,19 +173,19 @@ library(limma)
 	write.table(results, "results.txt", sep="\t", quote=FALSE)
 	return(results)
 }
-
+#set the if loop so that if celResults exist the limma analysis will take place
 if(!exists("celResults"))
 {
 	celRAW <- .getData()
 	eset<-exprs(celRAW)
-	celRMA <- rma(celRAW)
+	celRMA <- rma(celRAW)#this is the rma normalisation step
 	.ggboxIt(.summariseIt(log2(exprs(celRAW))),"sumRAW.pdf")
-	.ggboxIt(.summariseIt(exprs(celRMA)),"sumRMA.pdf")
+	.ggboxIt(.summariseIt(exprs(celRMA)),"sumRMA.pdf")#plot the cluster summarised data boxplots
 	.plotDensity(log2(exprs(celRAW)),"densityRAW.pdf")
-	.plotDensity(log2(exprs(celRMA)),"densityRMA.pdf")
-  celFilt <- .doFilter(celRMA)
+	.plotDensity(log2(exprs(celRMA)),"densityRMA.pdf")#plot the distribution of intensitites
+  celFilt <- .doFilter(celRMA)#filter the data
 	celResults <- .doDE(celFilt$eset)
 
 }
-
+# the results can then be ordered by adjusted p value to find the most significant genes
 sorted <- head(celResults[order(celResults$adj.P.Val),])#find lowest adjusted p values

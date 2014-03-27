@@ -1,6 +1,7 @@
-#install.packages("ape")
-#install.packages("phangorn")
-#install.packages("picante")
+#Install and require the neccessary packages
+install.packages("ape")
+install.packages("phangorn")
+install.packages("picante")
 require(ape)
 require(phangorn)
 require(picante)
@@ -17,7 +18,7 @@ tr.bionj<-bionj(d)
 #plot the tree
 plot(tr.bionj)
 rownames(x)
-#root the tree at the node=outgroup
+#root the tree at the chicken node
 tr.bionjr<-root(tr.bionj,outgroup="Chicken", resolve.root=TRUE )
 #plot the rooted tree
 plot(tr.bionjr);add.scale.bar(length=0.001)
@@ -34,6 +35,9 @@ set.seed(8)
 #bootstrap the data and plot the results
 bs<-bootstrap.pml(fit,bs=100,optNni=T)
 treeBS<-plotBS(fit$tree, type="p", bs)
-#
+#calculate the evolutionary distinctiveness scores
 orig<-evol.distinct(tr.bionjr,type="fair.proportion")
+#view ed score results table
 orig
+#plot a histogram of ed score frequencies
+hist(orig$w, main='ED scores', xlab='ED Score')
