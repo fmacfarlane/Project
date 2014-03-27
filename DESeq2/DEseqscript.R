@@ -13,7 +13,7 @@ require(limma)
 
 
 #Read in the data from the sequence count file
-geneCounts<-read.delim("~/GitHub/project/RNAseqCounts.txt",head=T,sep="\t",skip=1, row.names=1)
+geneCounts<-read.delim("~/GitHub/project/DESeq2/RNAseqCounts.txt",head=T,sep="\t",skip=1, row.names=1)
 
 nonZeroCounts<-geneCounts[rowSums(geneCounts[,6:28])>0,6:28]
 #run background correction and normalisation on the data
