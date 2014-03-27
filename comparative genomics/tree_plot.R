@@ -1,4 +1,4 @@
-#Install and require the neccessary packages
+#Install and require the neccessary packages for tree plotting
 install.packages("ape")
 install.packages("phangorn")
 install.packages("picante")
