@@ -58,10 +58,10 @@ library(limma)
   rownames(stats) <- NULL
  	return(stats)
 }
-#Input data from ROS.Cel files in Project directory
+#Input data from ROS.Cel files in project/limma directory
 .getData <- function()
 {#set current directory as working directory
-	baseDir <- "~/GitHub/project"
+	baseDir <- "~/GitHub/project/limma"
 	workingDir=paste0(baseDir)
 
 #input filenames and samplenames
