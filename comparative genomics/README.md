@@ -7,4 +7,4 @@ README.md file for the Comparative genomics folder.
   - The act.png file shows a visualisation obtained once act had been run using the blastn data.
   - The blastn.tab holds the output from running BLASTN on the two genome region sequences.
   - The mummer.png is the plot obtained from running mummer on the to genome regions.
-  -all other files with the prefix mummer are outoutresults from the mummer system.
+  - all other files with the prefix mummer are outputresults from the mummer system.
